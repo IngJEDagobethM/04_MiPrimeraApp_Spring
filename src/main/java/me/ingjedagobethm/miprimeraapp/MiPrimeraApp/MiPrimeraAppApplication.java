@@ -1,6 +1,7 @@
 package me.ingjedagobethm.miprimeraapp.MiPrimeraApp;
 
 import me.ingjedagobethm.miprimeraapp.MiPrimeraApp.bean.IMyBeanWithDependency;
+import me.ingjedagobethm.miprimeraapp.MiPrimeraApp.bean.IMyBeanWithProperties;
 import me.ingjedagobethm.miprimeraapp.MiPrimeraApp.bean.MyBean;
 import me.ingjedagobethm.miprimeraapp.MiPrimeraApp.component.IComponentDependency;
 import me.ingjedagobethm.miprimeraapp.MiPrimeraApp.component.IComponentDependency1;
@@ -18,17 +19,20 @@ public class MiPrimeraAppApplication implements CommandLineRunner {
 	private IComponentDependency1 iComponentDependency1;
 	private MyBean myBean;
 	private IMyBeanWithDependency iMyBeanWithDependency;
+	private IMyBeanWithProperties iMyBeanWithProperties;
 	@Autowired // en versiones recientes no es obligatorio
 	// constructor que inicializa el atributo
 	// la anotación @Qualifier selecciona el bean primario a inyectar.
 	public MiPrimeraAppApplication(@Qualifier("componentImplement2") IComponentDependency iComponentDependency,
 								   IComponentDependency1 iComponentDependency1,
 								   MyBean myBean,
-								   IMyBeanWithDependency iMyBeanWithDependency){
+								   IMyBeanWithDependency iMyBeanWithDependency,
+								   IMyBeanWithProperties iMyBeanWithProperties){
 		this.iComponentDependency = iComponentDependency;
 		this.iComponentDependency1 = iComponentDependency1;
 		this.myBean = myBean;
 		this.iMyBeanWithDependency = iMyBeanWithDependency;
+		this.iMyBeanWithProperties = iMyBeanWithProperties;
 	}
 	// Fin de la inyección de dependencia
 
@@ -42,5 +46,6 @@ public class MiPrimeraAppApplication implements CommandLineRunner {
 		iComponentDependency1.seguirSaludando();
 		myBean.print();
 		iMyBeanWithDependency.printWithDependency();
+		iMyBeanWithProperties.function();
 	}
 }
